@@ -1,19 +1,22 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var r = require('rethinkdb');
+var redis = require("redis");
+var client = redis.createClient();
 
 var imoveis = 0;
 var links = 0;
 var totalPages = 0;
 var qtdInserts = 0;
 
+function scrap(url){
+    request(url, parseRequest);    
+}
+
 client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-function scrap(url){
-    request(url, parseRequest);    
-}
 
 
 function parseRequest(error, response, html){
