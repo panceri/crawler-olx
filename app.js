@@ -1,9 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var r = require('rethinkdb');
-var sanitizer = require('sanitizer');
-var redis = require("redis");
-var client = redis.createClient();
 
 var imoveis = 0;
 var links = 0;
