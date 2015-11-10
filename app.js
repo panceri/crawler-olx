@@ -85,7 +85,7 @@ function parseRequest(error, response, html){
                 });
             }
 
-            /*if ($('.module_pagination > ul > li.next > a')){
+            if ($('.module_pagination > ul > li.next > a')){
                 $('.module_pagination > ul > li.next > a').each(function(index, a){
                     var toQueueUrl = $(a).attr('href').trim();
                     client.get(toQueueUrl, function(err, reply) {
@@ -98,13 +98,15 @@ function parseRequest(error, response, html){
                         }
                     });
                 });
-            }*/
+            }
         }else{
-            console.log("caralho");
+            console.log("Error parsing html");
         }
     }
 }
 
+
+// callback hell :)
 var connection = null;
 r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
     if (err) console.log(err);
@@ -115,13 +117,9 @@ r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
             if (err) console.log(err);
             r.table("imoveis").indexWait("url").run(connection, function(err, result){
                 if (err) console.log(err);
-                var url = "http://sc.olx.com.br/imoveis/venda";
-                scrap(url);
-                for(var a = 0; a <= 2044; a++){
-                    scrap(url + "?o=" + a);
-                }
-
+                scrap("http://sc.olx.com.br/imoveis/venda");
             });
         });
     });
 });
+
